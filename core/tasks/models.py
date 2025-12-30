@@ -3,7 +3,7 @@ from core.database import Base
 
 
 class TaskModel(Base):
-    __tabelname__= "tasks"
+    __tablename__= "tasks"
 
     id = Column(Integer,primary_key=True,autoincrement=True)
     title = Column(String(200),nullable=True)
