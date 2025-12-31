@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from tasks.routes import router as tasks_routes
+from users.routes import router as users_routes
+
 
 tags_metadata = [
     {
@@ -32,3 +34,4 @@ app = FastAPI(
         "name": "MIT",
     },lifespan=lifespan,openapi_tags=tags_metadata)
 app.include_router(tasks_routes)
+app.include_router(users_routes)
