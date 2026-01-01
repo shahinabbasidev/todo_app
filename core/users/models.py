@@ -1,5 +1,13 @@
-from sqlalchemy import Column,String,Integer,DateTime,func,Boolean,Text
 from core.database import Base
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Text,
+    Boolean,
+    DateTime,
+    func,
+)
 from sqlalchemy.orm import relationship
 from passlib.context import CryptContext
 
@@ -21,14 +29,12 @@ class UserModel(Base):
 
     task = relationship("TaskModel", back_populates="user")
 
-    # -------- Password Methods --------
-
     @staticmethod
     def hash_password(plain_password: str) -> str:
         return pwd_context.hash(plain_password)
 
     def verify_password(self, plain_password: str) -> bool:
         return pwd_context.verify(plain_password, self.password)
-    
-    def set_password(self,plain_text):
+
+    def set_password(self, plain_text: str):
         self.password = self.hash_password(plain_text)
