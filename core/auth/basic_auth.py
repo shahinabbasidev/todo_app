@@ -14,15 +14,22 @@ def get_authenticated_user(
 ):
     user_obj = (
         db.query(UserModel)
-        .filter(UserModel.username == credentials.username)
+        .filter_by(username = credentials.username)
         .one_or_none()
     )
+    if not user_obj:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            # headers={"WWW-Authenticate": "Basic"},
+        )
+
 
     if not user_obj.verify_password(credentials.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
+            # headers={"WWW-Authenticate": "Basic"},
         )
 
     return user_obj

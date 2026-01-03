@@ -37,7 +37,7 @@ app = FastAPI(
 app.include_router(tasks_routes)
 app.include_router(users_routes)
 
-from auth.basic_auth import get_authenticated_user
+from auth.token_auth import get_authenticated_user
 
 
 
@@ -48,8 +48,6 @@ async def public_authenticate():
     return {"message":"this is public route"}
 
 @app.get("/private")
-async def private_authenticate(user : UserModel = Depends(get_authenticated_user)):
-    print(user)
-
+async def private_authenticate(user :get_authenticated_user= Depends(get_authenticated_user)):
 
     return {"message":"this is private route"}
