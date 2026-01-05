@@ -27,7 +27,7 @@ async def login_user(request: UserLoginSchema, db: Session = Depends(get_db)):
         )
 
     access_token = generate_access_token(user_obj.id)
-    refresh_token = generate_refresh_token(user_obj.id)  # ✅ تصحیح شد
+    refresh_token = generate_refresh_token(user_obj.id) 
 
     return {
         "detail": "Logged in successfully",
