@@ -1,7 +1,5 @@
-from fastapi import FastAPI, Depends,Response,Request
+from fastapi import FastAPI,Response,Request
 from contextlib import asynccontextmanager
-from users.models import UserModel
-from auth.jwt_aut import get_authenticated_user
 from tasks.routes import router as tasks_routes
 from users.routes import router as users_routes
 

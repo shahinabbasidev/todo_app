@@ -8,7 +8,7 @@ class UserLoginSchema(BaseModel):
 
     
 class UserRegisterSchema(BaseModel):
-    username : str = Field(...,max_length=250,description="username for user login")
+    username : str = Field(...,max_length=250,description="username for user register")
     password : str = Field(...,description="password for register users")
     password_confirm : str = Field(...,description="confirm the password")
 

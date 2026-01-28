@@ -23,7 +23,7 @@ async def login_user(request: UserLoginSchema, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials",
-            headers={"WWW-Authenticate": "Bearer"},
+            headers={"WWW-Authenticate": "Bearer"}
         )
 
     access_token = generate_access_token(user_obj.id)
@@ -44,7 +44,7 @@ async def register_user(request: UserRegisterSchema, db: Session = Depends(get_d
     ).first():
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail="Username already taken"
+            detail="Username already exist"
         )
 
     user_obj = UserModel(username=request.username.lower())
@@ -54,6 +54,7 @@ async def register_user(request: UserRegisterSchema, db: Session = Depends(get_d
     db.refresh(user_obj)
 
     return {"detail": "User registered successfully", "user_id": user_obj.id}
+
 @router.post("/refresh-token")
 async def refresh_token(request: UserRefreshTokenSchema, db: Session = Depends(get_db)):
     try:

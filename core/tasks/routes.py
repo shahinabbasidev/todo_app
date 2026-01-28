@@ -65,3 +65,5 @@ async def delete_tasks(task_id: int = Path(...,gt=0),db:Session = Depends(get_db
     db.delete(task_obj)
     db.commit()
     return task_obj
+
+
